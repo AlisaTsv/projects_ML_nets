@@ -1,3 +1,4 @@
+-- Задание: разработать небoльшую базу данных для бронирования отелей (примерный прототип - booking.com)
 DROP DATABASE IF EXISTS booking_db;
 CREATE DATABASE booking_db; 
 USE booking_db;
