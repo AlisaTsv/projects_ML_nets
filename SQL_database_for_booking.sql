@@ -4,16 +4,16 @@ USE booking_db;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
-	id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY COMMENT "Идентификатор строки", 
-	email VARCHAR(100) UNIQUE NOT NULL COMMENT "Почта",
+    id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY COMMENT "Идентификатор строки", 
+    email VARCHAR(100) UNIQUE NOT NULL COMMENT "Почта",
     phone VARCHAR(100) UNIQUE NOT NULL COMMENT "Телефон",
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время создания строки",
-	updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время обновления строки"
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время обновления строки"
 ) COMMENT "Таблица пользователей";
 
 DROP TABLE IF EXISTS profiles;
 CREATE TABLE profiles (
-	id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY COMMENT "Идентификатор строки",
+    id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY COMMENT "Идентификатор строки",
     user_id INT UNSIGNED NOT NULL COMMENT "Ссылка на пользователя - владельца профиля",
     profile_type ENUM ('GUEST', 'HOTEL') NOT NULL COMMENT "Тип профиля",
     profile_status ENUM('ACTIVE', 'INACTIVE', 'BLOCKED') NOT NULL COMMENT "Текущий статус профиля",
@@ -42,19 +42,19 @@ CREATE TABLE hotels (
     id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY COMMENT "Идентификатор строки",
     profile_id INT UNSIGNED UNIQUE NOT NULL COMMENT "Ссылка на запись в таблице профилей",
     address_id INT UNSIGNED UNIQUE NOT NULL COMMENT "Ссылка на запись в таблице адресов",
-	hotel_name VARCHAR(100) NOT NULL COMMENT "Название отеля",
+    hotel_name VARCHAR(100) NOT NULL COMMENT "Название отеля",
     foundation_date DATE COMMENT "Дата основания отеля",
-	stars_status ENUM ('NO STARS OR UNKNOWN', 'ONE STAR', 'TWO STARS', 'THREE STARS', 'FOUR STARS', 'FIVE STARS') NOT NULL COMMENT "Информация о количестве звезд",
-	rating_id INT UNSIGNED UNIQUE NOT NULL COMMENT "Ссылка на таблицу пользовательских оценок"
+    stars_status ENUM ('NO STARS OR UNKNOWN', 'ONE STAR', 'TWO STARS', 'THREE STARS', 'FOUR STARS', 'FIVE STARS') NOT NULL COMMENT "Информация о количестве звезд",
+    rating_id INT UNSIGNED UNIQUE NOT NULL COMMENT "Ссылка на таблицу пользовательских оценок"
 ) COMMENT "Таблица профилей отелей";
 
 ALTER TABLE hotels ADD CONSTRAINT fk_hotels_profile_id FOREIGN KEY (profile_id) REFERENCES profiles(id); 
 
 DROP TABLE IF EXISTS address_book;
 CREATE TABLE address_book (
-	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки",
-	country VARCHAR(100) NOT NULL COMMENT "Страна", 
-	city VARCHAR(100) NOT NULL COMMENT "Город",
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Идентификатор строки",
+    country VARCHAR(100) NOT NULL COMMENT "Страна", 
+    city VARCHAR(100) NOT NULL COMMENT "Город",
 	phone VARCHAR(100) NOT NULL COMMENT "Телефон",
 	str_or_distr VARCHAR(100) NOT NULL COMMENT "Улица или район",
 	building_number VARCHAR(50) NOT NULL COMMENT "Номер дома", 
